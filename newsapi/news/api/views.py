@@ -21,7 +21,7 @@ def article_list_create_api_view(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, satatus=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(["GET", "PUT", "DELETE"])
 def article_detail_api_view(request, pk):
@@ -42,7 +42,7 @@ def article_detail_api_view(request, pk):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data) 
-        return Response(serializer.errors, satatus=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     elif request.method == "DELETE":
         article.delete()
@@ -60,7 +60,7 @@ class ArticleListCreateAPIView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, satatus=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class ArticleDetailAPIView(APIView):
 
@@ -79,7 +79,7 @@ class ArticleDetailAPIView(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data) 
-        return Response(serializer.errors, satatus=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
     def delete(self, request, pk):
         article = self.get_object(pk)
