@@ -21,8 +21,8 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.AlterField(
-            model_name='article',
+            model_name='Article',
             name='author',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='articles', to='news.journalist'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='Articles', to='news.journalist'),
         ),
     ]

@@ -4,17 +4,17 @@ from rest_framework import serializers
 from news.models import Article, Journalist
 
 
-
 class ArticleSerializer(serializers.ModelSerializer):
     
     time_since_publication = serializers.SerializerMethodField()
     #author = JournalistSerializer(read_only=True)
-    author = serializers.StringRelatedField()
+    author = serializers.StringRelatedField(read_only=True)
+    author_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=Journalist.objects.all(), source="author")
 
     class Meta:
         model = Article
         exclude = ("id",)
-        #fields = ("title","description","body") #we want to choose a couple of fields!
+        # fields = ("title","description","body") #we want to choose a couple of fields!
         # fields = "__all__" #all the fields of our model
 
     def get_time_since_publication(self, object):
@@ -36,8 +36,9 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class JournalistSerializer(serializers.ModelSerializer):
-    articles = serializers.HyperlinkedRelatedField(many=True, read_only=True,view_name="articles-detail")
-    #articles = ArticleSerializer(many = True, read_only=True)
+    
+    Articles = serializers.HyperlinkedRelatedField(many=True, read_only=True,view_name="Articles-detail")
+    #Articles = ArticleSerializer(many = True, read_only=True)
 
     class Meta:
         model = Journalist
